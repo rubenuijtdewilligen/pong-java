@@ -1,11 +1,13 @@
 import javax.swing.JFrame;
 import java.awt.Graphics2D;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 
 public class Window extends JFrame implements Runnable {
 
-    // Instantiate the graphics engine
+    // Initialize stuff
     Graphics2D g2;
+    KeyL keyListener = new KeyL();
 
     public Window() {
         this.setSize(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
@@ -13,6 +15,7 @@ public class Window extends JFrame implements Runnable {
         this.setResizable(false);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.addKeyListener(keyListener);
         g2 = (Graphics2D)this.getGraphics();
     }
 
@@ -25,6 +28,12 @@ public class Window extends JFrame implements Runnable {
     public void update(double dt) {
         g2.setColor(Color.BLACK);
         g2.fillRect(0, 0, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
+
+        if (keyListener.isKeyPressed(KeyEvent.VK_UP)) {
+            System.out.println("The user is pressing the up arrow.");
+        } else if (keyListener.isKeyPressed(KeyEvent.VK_DOWN)) {
+            System.out.println("The user is pressing the down arrow.");
+        }
     }
 
     /**
