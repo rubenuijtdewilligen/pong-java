@@ -13,7 +13,7 @@ public class KeyL implements KeyListener {
      */
     @Override
     public void keyTyped(KeyEvent e) {
-
+        // this is just here because Java AWT wants me to have it here
     }
 
     /**
