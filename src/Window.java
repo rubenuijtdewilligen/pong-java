@@ -8,6 +8,7 @@ public class Window extends JFrame implements Runnable {
     public KeyL keyListener = new KeyL();
     public Rectangle playerOne, ai, ball;
     public PlayerController playerController;
+    public BallController ballController;
 
     public Window() {
         // Initialize window
@@ -27,7 +28,9 @@ public class Window extends JFrame implements Runnable {
         playerController = new PlayerController(playerOne, keyListener);
 
         ai = new Rectangle(Constants.WINDOW_WIDTH - Constants.PADDLE_WIDTH - Constants.HORIZONTAL_PADDING, 40, Constants.PADDLE_WIDTH, Constants.PADDLE_HEIGHT, Constants.PADDLE_COLOR);
+
         ball = new Rectangle(Constants.WINDOW_WIDTH / 2, Constants.WINDOW_HEIGHT / 2, Constants.BALL_WIDTH, Constants.BALL_WIDTH, Color.WHITE);
+        ballController = new BallController(ball, playerOne, ai);
     }
 
     /**
@@ -43,6 +46,7 @@ public class Window extends JFrame implements Runnable {
         g2.drawImage(doubleBufferImage, 0, 0, this);
 
         playerController.update(dt);
+        ballController.update(dt);
     }
 
     /**
