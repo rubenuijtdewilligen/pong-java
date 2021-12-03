@@ -16,7 +16,7 @@ public class Constants {
     public static final double PADDLE_SPEED = 225;
 
     public static final int BALL_WIDTH = 10;
-    public static final double BALL_SPEED_HORIZONTAL = 150.0;
-    public static final double BALL_SPEED_VERTICAL = -10.0;
+    public static final double BALL_SPEED_HORIZONTAL = -150.0;
+    public static final double BALL_SPEED_VERTICAL = 60.0;
 
 }

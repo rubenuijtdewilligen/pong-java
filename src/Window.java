@@ -8,6 +8,7 @@ public class Window extends JFrame implements Runnable {
     public KeyL keyListener = new KeyL();
     public Rectangle playerOne, ai, ball;
     public PlayerController playerController;
+    public AIController aiController;
     public BallController ballController;
 
     public Window() {
@@ -24,13 +25,14 @@ public class Window extends JFrame implements Runnable {
 
         g2 = (Graphics2D)this.getGraphics();
 
-        playerOne = new Rectangle(Constants.HORIZONTAL_PADDING, 40, Constants.PADDLE_WIDTH, Constants.PADDLE_HEIGHT, Constants.PADDLE_COLOR);
-        playerController = new PlayerController(playerOne, keyListener);
 
+        playerOne = new Rectangle(Constants.HORIZONTAL_PADDING, 40, Constants.PADDLE_WIDTH, Constants.PADDLE_HEIGHT, Constants.PADDLE_COLOR);
+        ball = new Rectangle(Constants.WINDOW_WIDTH / 2, Constants.WINDOW_HEIGHT / 2, Constants.BALL_WIDTH, Constants.BALL_WIDTH, Color.WHITE);
         ai = new Rectangle(Constants.WINDOW_WIDTH - Constants.PADDLE_WIDTH - Constants.HORIZONTAL_PADDING, 40, Constants.PADDLE_WIDTH, Constants.PADDLE_HEIGHT, Constants.PADDLE_COLOR);
 
-        ball = new Rectangle(Constants.WINDOW_WIDTH / 2, Constants.WINDOW_HEIGHT / 2, Constants.BALL_WIDTH, Constants.BALL_WIDTH, Color.WHITE);
+        playerController = new PlayerController(playerOne, keyListener);
         ballController = new BallController(ball, playerOne, ai);
+        aiController = new AIController(new PlayerController(ai), ball);
     }
 
     /**
@@ -46,6 +48,7 @@ public class Window extends JFrame implements Runnable {
         g2.drawImage(doubleBufferImage, 0, 0, this);
 
         playerController.update(dt);
+        aiController.update(dt);
         ballController.update(dt);
     }
 
